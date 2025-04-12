@@ -3,16 +3,19 @@ import java.util.ArrayList;
 
 public class database {
     private static ArrayList<Entity> entities;
+    private static ArrayList<Entity> copiedEntities;
     private static int y = 0;
 
     public static void add(Entity e) {
+        Entity copy = e.copy();
+        copiedEntities.add(copy);
         entities.add(e);
         y = y + 1;
         e.id = y;
     }
 
     public static Entity get(int id){
-        for (Entity Search : entities) {
+        for (Entity Search : copiedEntities) {
             if (Search.id == id)
                 return Search;
         }
@@ -28,7 +31,7 @@ public class database {
     }
 
     public static void update(Entity e){
-        for(Entity find : entities){
+        for(Entity find : copiedEntities){
             if(find.id == e.id)
                 find = e;
         }
